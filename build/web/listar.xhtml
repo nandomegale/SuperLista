@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Produtos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body background=" http://www.conarec.com.br/wp-content/uploads/2017/05/conarec-millennials-supermercado.jpg">
+        <h:form>
+            <p:dataList id="listaProdutos" value="#{listaView.produtos}" var="produto" 
+                        type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+                <f:facet name="header">
+                    Produtos
+                </f:facet>
+                <p:commandLink id="delete" update="listaProdutos" title="Delete Item" 
+
+                               styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px"
+                               actionListener="#{listaView.deleteProduto(produto)}">
+                    <f:setPropertyActionListener value="#{produto}" target="#{listaView.produtoSelected}" />
+                    <h:outputText value="#{produto.id}, #{produto.nome}, #{produto.qnt}, #{produto.price}" />
+                </p:commandLink>
+
+                <p:commandLink update="" oncomplete="PF('produtoDialog').show()" 
+                               title="Edit Item" styleClass="ui-icon ui-icon-pencil" 
+                               style="float:left;margin-right:10px">
+                    <f:setPropertyActionListener value="#{produto}" target="#{listaView.produtoSelected}" />
+                    <h:outputText value="#{produto.nome}, #{produto.price}" />
+                </p:commandLink>
+                <h:outputText value="#{produto.nome}, #{produto.price}" style="display:inline-block"/>
+            </p:dataList>
+        </h:form>
+
+        <p:dialog header="Produto Info" widgetVar="produtoDialog" modal="true" 
+                  showEffect="blind" hideEffect="explode" resizable="true"
+                  width="500" height="500">
+            
+                <p:panelGrid  columns="2" 
+                              columnClasses="label,value">
+                
+                    <h:outputText value="Nome:" />
+                    <h:outputText value="#{listaView.produtoSelected.nome}" />
+
+                    <h:outputText value="Price:" />
+                    <h:outputText value="#{listaView.produtoSelected.price}" />
+                </p:panelGrid>
+            
+        </p:dialog>
+
+        <p:button icon="ui-icon-arrowreturn-1-w" value="Voltar" outcome="/index"/>
+    </body>
+</html>

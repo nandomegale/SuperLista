@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Super Listas</title>
+    </h:head>
+    <h:body style="background: url(http://www.conarec.com.br/wp-content/uploads/2017/05/conarec-millennials-supermercado.jpg)">
+        <h:form>
+            
+            <h:panelGrid columns="2" cellpadding="5" style="margin-bottom:10px">
+                <h:outputLabel style="font-size: 20px" value="Nome: "/>
+                <p:inputText id="nome" label="nome" 
+                              value="#{cadastroView.nomeProduto}"/>
+
+                <h:outputLabel style="font-size: 20px;"  value="Quantidade:" />
+                <p:spinner id="qnt" value="#{cadastroView.qntProduto}" />
+
+                <h:outputLabel style="font-size: 20px" value="Preço: "/>
+                <p:inputText id="preco" value="#{cadastroView.precoProduto}"/> 
+
+                <p:commandButton icon="ui-icon-cart" value="Cadastrar" id="confirmButton" actionListener="#{cadastroView.cadastrar}"/>
+                <p:button icon="ui-icon-arrowreturn-1-w" value="Voltar" outcome="/index"/>
+
+            </h:panelGrid>
+            
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+        </h:form>
+    </h:body>
+</html>
+
